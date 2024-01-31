@@ -38,13 +38,6 @@ blockchain = [
 # somehow iterate through the blockchain array and then iterate through each hash 
 ## nested loop? maybe 
 
-x = 0
-
-# bens_balance = {"name" => "ben", "balance" => 0}
-# brians_balance = {"name" => "brian", "balance" => 0}
-# evans_balance = {"name" => "evan", "balance" => 0}
-# anthonys_balance = {"name" => "anthony", "balance" => 0}
-
 users = [ 
 bens_balance = {"name" => "ben", "balance" => 0},
 brians_balance = {"name" => "brian", "balance" => 0},
@@ -53,69 +46,97 @@ anthonys_balance = {"name" => "anthony", "balance" => 0}
 ]
 
 
-
-#recording initial transactions 
-# for hash in blockchain 
-#   if blockchain[x]["from_user"] == nil and blockchain[x]["to_user"] == "ben"
-#       bens_balance[1] = bens_balance["balance"] + blockchain[x]["amount"]
-#       puts "Ben: #{bens_balance[1]}"
-#       x = x + 1 
-#   if blockchain[x]["from_user"] == nil and blockchain[x]["to_user"] == "brian" 
-#       brians_balance[1] = brians_balance["balance"] + blockchain[x]["amount"]
-#       puts "Brian: #{brians_balance}"
-#       x = x + 1
-#    end 
-#   end 
-# end
-
-# recording user transactions 
-# for hash in blockchain 
-#   #Ben's transactions
-#   if blockchain[x]["from_user"] == "ben"
-#     if blockchain[x]["to_user"] == "brian"
-#       #ben to brian code
-#     if blockchain[x]["to_user"] == "evan"
-#       #ben to evan code
-#       x = x + 1 
-#   end 
-# end 
-
-
-
-# puts blockchain[0]["to_user"]
-
 y = 0 
+x = 0
 
-# post all in flows
+#post all in flows
+for item in blockchain 
+    if blockchain[y]["to_user"] == "ben" 
+      bens_balance["balance"] += blockchain[y]["amount"]
+      #puts "Ben: #{bens_balance["balance"]}"
+      y = y + 1 
+    elsif blockchain[y]["to_user"] == "brian"
+      brians_balance["balance"] += blockchain[y]["amount"]
+      #puts "Brian: #{brians_balance["balance"]}"
+      y = y + 1 
+    elsif blockchain[y]["to_user"] == "evan"
+      evans_balance["balance"] += blockchain[y]["amount"]
+      #puts "Evan: #{evans_balance["balance"]}"
+      y = y + 1 
+    elsif blockchain[y]["to_user"] == "anthony"
+      anthonys_balance["balance"] += blockchain[y]["amount"]
+      #puts "Anthony: #{anthonys_balance["balance"]}"
+      y = y + 1 
+  for tx in 1..y
+      if blockchain[x]["from_user"] == nil
+        x += 1
+      elsif blockchain[x]["from_user"] == "ben" 
+        bens_balance["balance"] -= blockchain[x]["amount"]
+        puts "Ben: #{bens_balance["balance"]}"
+        x += 1 
+      elsif blockchain[y]["from_user"] == "brian"
+        brians_balance["balance"] -= blockchain[x]["amount"]
+        puts "Brian: #{brians_balance["balance"]}"
+        x += 1 
+      elsif blockchain[y]["from_user"] == "evan"
+        evans_balance["balance"] -= blockchain[x]["amount"]
+        puts "Evan: #{evans_balance["balance"]}"
+        x += 1 
+      elsif blockchain[y]["from_user"] == "anthony"
+        anthonys_balance["balance"] -= blockchain[x]["amount"]
+        puts "Anthony: #{anthonys_balance["balance"]}"
+        x += 1 
+      end 
+    end 
+  end 
+end 
+
+puts "Start of final outputs "
+puts "Anthony: #{anthonys_balance["balance"]}"
+puts "Evan: #{evans_balance["balance"]}"
+puts "Brian: #{brians_balance["balance"]}"
+puts "Ben: #{bens_balance["balance"]}"
+
+
 # for item in blockchain 
-#   if blockchain[y]["to_user"] == "ben"
-#     bens_balance[1] = bens_balance["balance"] + blockchain[y]["amount"]
-#     puts "Ben: #{bens_balance[1]}"
-#     y = y + 1 
-#   elsif blockchain[y]["to_user"] == "brian"
-#     brians_balance[1] = brians_balance["balance"] + blockchain[y]["amount"]
-#     puts "Brian: #{brians_balance[1]}"
-#     y = y + 1 
-#   elsif blockchain[y]["to_user"] == "evan"
-#     evans_balance[1] = evans_balance["balance"] + blockchain[y]["amount"]
-#     puts "Evan: #{evans_balance[1]}"
-#     y = y + 1 
-#   elsif blockchain[y]["to_user"] == "anthony"
-#     anthonys_balance[1] = anthonys_balance["balance"] + blockchain[y]["amount"]
-#     puts "Anthony: #{anthonys_balance[1]}"
-#     y = y + 1 
+#   if blockchain[y]["to_user"] == "ben" || blockchain[y]["from_user"] == "ben" 
+#     if blockchain[y]["from_user"] == "ben"
+#       bens_balance["balance"] -= blockchain[y]["amount"]
+#       puts "Ben: #{bens_balance["balance"]}"
+#       y += 1
+#     elsif blockchain[y]["to_user"] == "ben"
+#       bens_balance["balance"] += blockchain[y]["amount"]
+#       puts "Ben: #{bens_balance["balance"]}"
+#       y += 1
+#     end 
 #   end 
 # end 
+
+
+
+
+
+
+
+#bens_balance["balance"] = bens_balance["balance"] + blockchain[0]["amount"]
+
+#puts bens_balance["balance"]
+#puts blockchain[0]["amount"].class
+#puts bens_balance["balance"]
 
 a = 0 
 
-#for people in users 
-  # if users[a]["name"] == blockchain[a]["to_user"]
-  #   users[a]["balance"] = users[a]["balance"] + blockchain[a]["amount"]
-  #   puts users[a]["balance"]
-  #   a = a + 1
-  # end
-#end 
+# for people in users 
+#   if users[a]["name"] == blockchain[a]["to_user"]
+#     users[a]["balance"] = users[a]["balance"] + blockchain[a]["amount"]
+#     puts users[a]["balance"]
+#     a = a + 1
+#   if users[b]["name"] == blockchain[b]["from_user"]
+#     users[b]["balance"] = users[b]["balance"] - blockchain[b]["amount"]
+#     puts users[b]["balance"]
+#     b = b + 1
+#   end 
+# end 
 
 b = 0 
 # for guys in users 
